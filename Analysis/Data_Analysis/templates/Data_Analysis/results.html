@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Analysis Results</title>
+</head>
+<body>
+    <h1>Data Analysis Results</h1>
+    <h2>First Few Rows</h2>
+    <div>{{ head|safe }}</div>
+
+    <h2>Summary Statistics</h2>
+    <div>{{ summary_stats|safe }}</div>
+
+    <h2>Missing Values</h2>
+    <ul>
+        {% for column, count in missing_values.items %}
+            <li>{{ column }}: {{ count }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Histograms</h2>
+    {% for column, path in histograms.items %}
+        <div>
+            <h3>{{ column }}</h3>
+            <img src="/static/{{ path }}" alt="Histogram of {{ column }}">
+        </div>
+    {% endfor %}
+</body>
+</html>
